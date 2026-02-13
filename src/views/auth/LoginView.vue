@@ -24,9 +24,16 @@ const handleSubmit = async () => {
   });
 
   if (success) {
-    // Redirect to the page they tried to access or dashboard
-    const redirectPath = route.query.redirect as string || '/dashboard';
-    router.push(redirectPath);
+    if (route.query.redirect) {
+      router.push(route.query.redirect as string);
+    } else {
+      // Redirect based on role
+      if (authStore.isAdmin) {
+        router.push('/dashboard');
+      } else {
+        router.push('/map'); // Assuming users should see the map first, or '/stations'
+      }
+    }
   }
 };
 </script>
@@ -87,6 +94,27 @@ const handleSubmit = async () => {
             Sign up
           </router-link>
         </p>
+      </div>
+
+       <div class="mt-8 p-4 bg-gray-50 rounded-md border border-gray-200">
+        <h3 class="text-sm font-medium text-gray-700 mb-2">Demo Credentials:</h3>
+        <div class="grid grid-cols-1 gap-2 text-xs text-gray-600">
+          <div class="flex justify-between items-center p-2 bg-white rounded border border-gray-100">
+             <div>
+              <span class="font-semibold block text-gray-800">Admin:</span>
+              <span>admin@demo.com</span>
+             </div>
+             <span class="font-mono bg-gray-100 px-1 rounded">123456</span>
+          </div>
+          <div class="flex justify-between items-center p-2 bg-white rounded border border-gray-100">
+             <div>
+              <span class="font-semibold block text-gray-800">User:</span>
+              <span>user@demo.com</span>
+             </div>
+             <span class="font-mono bg-gray-100 px-1 rounded">123456</span>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 mt-2 text-center">Use these to test permissions.</p>
       </div>
     </div>
   </div>
