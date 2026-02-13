@@ -9,8 +9,12 @@ const navigateToLogin = () => {
   router.push('/login');
 };
 
-const navigateToMap = () => {
-  router.push('/map');
+const handleAuthenticatedNavigation = () => {
+  if (authStore.isAdmin) {
+    router.push('/admin/dashboard');
+  } else {
+    router.push('/map');
+  }
 };
 </script>
 
@@ -42,10 +46,10 @@ const navigateToMap = () => {
           
           <div class="flex flex-col sm:flex-row gap-4">
             <button
-              @click="authStore.isAuthenticated ? navigateToMap() : navigateToLogin()"
+              @click="authStore.isAuthenticated ? handleAuthenticatedNavigation() : navigateToLogin()"
               class="px-8 py-4 bg-green-600 text-white rounded-xl font-bold text-lg hover:bg-green-500 transition-all shadow-lg hover:shadow-green-500/30 flex items-center justify-center group"
             >
-              {{ authStore.isAuthenticated ? 'Find a Charger' : 'Get Started' }}
+              {{ authStore.isAuthenticated ? (authStore.isAdmin ? 'Go to Admin Dashboard' : 'Find a Charger') : 'Get Started' }}
               <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
             </button>
             <button
@@ -184,7 +188,7 @@ const navigateToMap = () => {
             <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Ready to start your journey?</h2>
             <p class="text-xl text-green-100 mb-10 max-w-2xl mx-auto">Join the ChargeUP community today and experience the easiest way to power your EV.</p>
              <button
-              @click="authStore.isAuthenticated ? navigateToMap() : navigateToLogin()"
+              @click="authStore.isAuthenticated ? handleAuthenticatedNavigation() : navigateToLogin()"
               class="px-10 py-4 bg-white text-green-700 rounded-full font-bold text-lg hover:bg-gray-100 transition-all shadow-xl hover:-translate-y-1"
             >
               Get Started Now

@@ -29,9 +29,9 @@ const handleSubmit = async () => {
     } else {
       // Redirect based on role
       if (authStore.isAdmin) {
-        router.push('/dashboard');
+        router.push('/admin/dashboard');
       } else {
-        router.push('/map'); // Assuming users should see the map first, or '/stations'
+        router.push('/map'); // Users go to map
       }
     }
   }
