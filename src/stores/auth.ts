@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import api from '../services/api';
+// import api from '../services/api';
 import { toast } from 'vue3-toastify';
 
 export interface User {
@@ -50,15 +50,22 @@ export const useAuthStore = defineStore('auth', () => {
     loading.value = true;
     error.value = null;
 
+    await new Promise(resolve => setTimeout(resolve, 800));
+
     try {
-      const response = await api.post('/auth/register', userData);
-      const { data } = response.data;
+      const mockUser: User = {
+        _id: 'mock-user-' + Date.now(),
+        name: userData.name,
+        email: userData.email,
+        role: 'user',
+        token: 'mock-token-' + Date.now()
+      };
 
-      user.value = data;
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data));
+      user.value = mockUser;
+      localStorage.setItem('token', mockUser.token!);
+      localStorage.setItem('user', JSON.stringify(mockUser));
 
-      toast.success('Registration successful!');
+      toast.success('Registration successful (Mock)!');
       return true;
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Registration failed';
@@ -75,15 +82,29 @@ export const useAuthStore = defineStore('auth', () => {
     loading.value = true;
     error.value = null;
 
+    await new Promise(resolve => setTimeout(resolve, 800));
+
     try {
-      const response = await api.post('/auth/login', credentials);
-      const { data } = response.data;
+      // Simulate successful login for any credentials
+      const mockUser: User = {
+        _id: 'mock-user-login',
+        name: 'Mock User',
+        email: credentials.email,
+        role: 'user', // Default to user, admin logic handles specific emails if needed
+        token: 'mock-token-login'
+      };
 
-      user.value = data;
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data));
+      if (credentials.email.includes('admin')) {
+        mockUser.name = 'Mock Admin';
+        mockUser.role = 'admin';
+        mockUser._id = 'mock-admin-login';
+      }
 
-      toast.success('Login successful!');
+      user.value = mockUser;
+      localStorage.setItem('token', mockUser.token!);
+      localStorage.setItem('user', JSON.stringify(mockUser));
+
+      toast.success('Login successful (Mock)!');
       return true;
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Login failed';
