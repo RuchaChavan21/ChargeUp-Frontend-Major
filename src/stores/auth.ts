@@ -12,6 +12,19 @@ export interface User {
 }
 
 export const useAuthStore = defineStore('auth', () => {
+  // Auto-login as generic admin for development
+  if (!localStorage.getItem('user')) {
+    const mockUser: User = {
+      _id: 'dev-admin',
+      name: 'Developer Admin',
+      email: 'admin@dev.com',
+      role: 'admin',
+      token: 'dev-mock-token'
+    };
+    localStorage.setItem('user', JSON.stringify(mockUser));
+    localStorage.setItem('token', mockUser.token!);
+  }
+
   const user = ref<User | null>(null);
   const loading = ref(false);
   const error = ref<string | null>(null);
@@ -36,15 +49,15 @@ export const useAuthStore = defineStore('auth', () => {
   async function register(userData: { name: string; email: string; password: string }) {
     loading.value = true;
     error.value = null;
-    
+
     try {
       const response = await api.post('/auth/register', userData);
       const { data } = response.data;
-      
+
       user.value = data;
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data));
-      
+
       toast.success('Registration successful!');
       return true;
     } catch (err: unknown) {
@@ -61,15 +74,15 @@ export const useAuthStore = defineStore('auth', () => {
   async function login(credentials: { email: string; password: string }) {
     loading.value = true;
     error.value = null;
-    
+
     try {
       const response = await api.post('/auth/login', credentials);
       const { data } = response.data;
-      
+
       user.value = data;
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data));
-      
+
       toast.success('Login successful!');
       return true;
     } catch (err: unknown) {
@@ -99,6 +112,6 @@ export const useAuthStore = defineStore('auth', () => {
     checkAuth,
     register,
     login,
-    logout
+    logout,
   };
 });

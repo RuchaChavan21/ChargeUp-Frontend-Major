@@ -29,16 +29,16 @@ api.interceptors.response.use(
     return response;
   },
   async (error) => {
-    const originalRequest = error.config;
-    
+    // const originalRequest = error.config;
+
     // Handle token expiration or auth errors
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      // Clear token and redirect to login
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.location.href = '/login';
-    }
-    
+    // if (error.response?.status === 401 && !originalRequest._retry) {
+    //   // Clear token and redirect to login
+    //   localStorage.removeItem('token');
+    //   localStorage.removeItem('user');
+    //   window.location.href = '/login';
+    // }
+
     return Promise.reject(error);
   }
 );
