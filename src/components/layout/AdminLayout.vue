@@ -15,6 +15,7 @@ import {
   XMarkIcon,
   ArrowRightOnRectangleIcon
 } from '@heroicons/vue/24/outline';
+import logo from '../../assets/image.png';
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -57,9 +58,10 @@ const handleLogout = () => {
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
       ]"
     >
-      <div class="flex items-center justify-between h-16 px-6 bg-gray-800 border-b border-gray-700">
+      <div class="flex items-center h-16 px-6 bg-gray-800 border-b border-gray-700">
+        <img :src="logo" alt="ChargeUP Logo" class="h-8 w-auto mr-3" />
         <h1 class="text-xl font-bold tracking-wider text-green-400">ChargeUP<span class="text-white text-xs ml-1 font-normal opacity-70">ADMIN</span></h1>
-        <button @click="toggleSidebar" class="lg:hidden text-gray-400 hover:text-white">
+        <button @click="toggleSidebar" class="lg:hidden ml-auto text-gray-400 hover:text-white">
           <XMarkIcon class="h-6 w-6" />
         </button>
       </div>

@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '../../stores/auth';
+import logo from '../../assets/image.png';
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -30,8 +31,8 @@ const logout = () => {
       <div class="flex justify-between h-16">
         <div class="flex items-center">
           <router-link to="/" class="flex items-center" @click="closeMobileMenu">
-            <span class="text-2xl text-green-600 mr-2">⚡</span>
-            <span class="font-bold text-gray-900">EV Station Manager</span>
+            <img :src="logo" alt="ChargeUP Logo" class="h-10 w-auto mr-2" />
+            <span class="font-bold text-gray-900 text-xl">ChargeUP</span>
           </router-link>
         </div>
 

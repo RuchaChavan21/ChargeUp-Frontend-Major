@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import logo from '../../assets/image.png';
 const currentYear = new Date().getFullYear();
 </script>
 
@@ -8,8 +9,8 @@ const currentYear = new Date().getFullYear();
       <div class="flex flex-col md:flex-row justify-between items-center">
         <div class="mb-4 md:mb-0">
           <div class="flex items-center">
-            <span class="text-2xl text-green-400 mr-2">⚡</span>
-            <span class="font-bold text-xl">EV Station Manager</span>
+            <img :src="logo" alt="ChargeUP Logo" class="h-8 w-auto mr-3" />
+            <span class="font-bold text-xl">ChargeUP</span>
           </div>
           <p class="text-gray-400 mt-2">
             A complete solution for managing EV charging stations

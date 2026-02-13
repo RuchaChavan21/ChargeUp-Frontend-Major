@@ -87,7 +87,8 @@ const statusText = computed(() => {
         </div>
       </div>
 
-      <!-- Action Button -->
+      <!-- Action Button (Removed for User View) -->
+      <!-- 
       <div class="pt-3 border-t border-gray-100">
         <button 
           @click="emit('edit', station._id)"
@@ -95,7 +96,8 @@ const statusText = computed(() => {
         >
           Edit Station
         </button>
-      </div>
+      </div> 
+      -->
     </div>
   </div>
 </template>
