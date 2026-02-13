@@ -4,6 +4,7 @@ import type { ChargingStation } from '../../stores/stations';
 
 const props = defineProps<{
   station: ChargingStation;
+  readOnly?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -79,7 +80,7 @@ const handleViewOnMap = () => {
         </p>
       </div>
       
-      <div class="pt-4 border-t border-gray-100 flex justify-end space-x-2">
+      <div v-if="!readOnly" class="pt-4 border-t border-gray-100 flex justify-end space-x-2">
         <button
           @click.stop="handleEdit"
           class="px-3 py-1 bg-blue-50 text-blue-600 rounded hover:bg-blue-100 transition-colors text-sm"

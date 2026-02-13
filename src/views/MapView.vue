@@ -305,7 +305,6 @@ const handleCloseInfo = () => {
       <div v-if="selectedStation" class="absolute bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:w-80 z-20">
         <StationInfo 
           :station="selectedStation" 
-          @edit="handleEditStation(selectedStation._id)" 
           @close="handleCloseInfo" 
         />
       </div>
