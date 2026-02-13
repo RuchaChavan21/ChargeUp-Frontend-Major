@@ -80,6 +80,21 @@ const routes = [
         name: 'AdminRevenue',
         component: () => import('../views/admin/revenue/RevenueView.vue')
       },
+      {
+        path: 'analytics',
+        name: 'AdminAnalytics',
+        component: () => import('../views/admin/analytics/AnalyticsDashboard.vue')
+      },
+      {
+        path: 'users',
+        name: 'AdminUsers',
+        component: () => import('../views/admin/users/UsersView.vue')
+      },
+      {
+        path: 'settings',
+        name: 'AdminSettings',
+        component: () => import('../views/admin/settings/SettingsView.vue')
+      },
     ]
   },
   {
